@@ -1,9 +1,11 @@
 {
-  "name": "Mckayla Is Not Impressed",
+  "name": "McKayla Is Not Impressed",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "Mckayla is not impressed.",
-  "icons": { "128": "icon_128.png"},
+  "description": "McKayla is not impressed with random images as you browse the web.",
+  "icons": { "16": "icon_16.png",
+             "48": "icon_48.png",
+             "128": "icon_128.png"},
   "content_scripts": [ {
         "exclude_globs":    [  ],
         "include_globs":    [ "*" ],
@@ -11,6 +13,10 @@
                               "contentscript.js" ],
         "matches":          [  "http://*/*",
                                "https://*/*"
+                            ],
+        "exclude_matches":  [
+                              "https://www.google.com/search*",
+                              "http://www.google.com/search*"
                             ],
         "run_at": "document_end"
     } ],
