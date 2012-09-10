@@ -12,8 +12,7 @@ jQuery(document).ready(function($) {
     	   $(this).attr('src')!=undefined &&
     	   $(this).height() >= 50 &&
     	   $(this).is(":visible")) {
-    	   	
- 		   console.log($(this).attr('src'))
+
     	   var mckayla=document.createElement("img")
     	   mckayla.src=chrome.extension.getURL("mckayla.png")
     	   mckayla.style.position="absolute"
