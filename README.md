@@ -7,3 +7,6 @@ Prank your friends by installing it on their machines when they're not looking!
 
 Download available here:
 https://chrome.google.com/webstore/detail/bigmiaijamgkhfbdolkjagnkppjgccne
+
+Also, check it out - it's featured on Mashable!
+http://mashable.com/2012/09/10/mckayla-maroney-chrome-plugin/
