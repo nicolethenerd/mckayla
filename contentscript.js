@@ -14,10 +14,10 @@ var McKayla = {
             ,height
             ,src_img = {
                 zIndex: $(src).css('z-index')
-                ,width: $(src).outerWidth()
-                ,height: $(src).outerHeight()
-                // ,width: $(src).width()
-                // ,height: $(src).height()
+                ,width: $(src).width()
+                ,height: $(src).height()
+                // ,width: $(src).outerWidth()
+                // ,height: $(src).outerHeight()
                 // ,right: $(src).offset().left + $(src).outerWidth()
                 // ,bottom: $(src).offset().top + $(src).outerHeight()
             }
