@@ -1,11 +1,12 @@
 // Constants
 var THRESHOLD = .2
     ,MCKAYLA_IMG_URL = chrome.extension.getURL('mckayla.png')
-    ,ORIG_HEIGHT = 1483
     ,ORIG_WIDTH = 1024
-    ,HEIGHT_RATIO = 0.8
+    ,ORIG_HEIGHT = 1483
     ,WIDTH_RATIO = 0.3
+    ,HEIGHT_RATIO = 0.8
 
+// McKayla generator should be separated into it's own script
 var McKayla = {
     generate: function(src) {
         var
