@@ -3,22 +3,28 @@ var THRESHOLD = .2
     ,MCKAYLA_IMG_URL = chrome.extension.getURL('mckayla.png')
     ,ORIG_HEIGHT = 1483
     ,ORIG_WIDTH = 1024
-    ,HEIGHT_RATIO = .8
-    ,WIDTH_RATIO = .3
+    ,HEIGHT_RATIO = 0.8
+    ,WIDTH_RATIO = 0.3
 
-function McKayla(src_img) { this.src_img = src_img }
-
-McKayla.prototype = {
-    generate: function() {
-        var src_img = {
-                height: $(this.src_img).height()
-                ,width: $(this.src_img).width()
-                ,right: $(this.src_img).offset().left + $(this.src_img).outerWidth()
-                ,bottom: $(this.src_img).offset().top + $(this.src_img).outerHeight()
-                ,zIndex: $(this.src_img).css('z-index')
-            }
-            ,width
+var McKayla = {
+    generate: function(src) {
+        var
+            width
             ,height
+            ,src_img = {
+                zIndex: $(src).css('z-index')
+                ,width: $(src).outerWidth()
+                ,height: $(src).outerHeight()
+                // ,width: $(src).width()
+                // ,height: $(src).height()
+                // ,right: $(src).offset().left + $(src).outerWidth()
+                // ,bottom: $(src).offset().top + $(src).outerHeight()
+            }
+
+        src_img.right = $(src).offset().left + src_img.width
+        src_img.bottom = $(src).offset().top + src_img.height
+
+        console.log(src_img)
 
         // Calculate McKayla dimensions
         if(src_img.height <= src_img.width) {
@@ -29,30 +35,31 @@ McKayla.prototype = {
             height = ORIG_HEIGHT * width/ORIG_WIDTH
         }
 
-        this.img = document.createElement('img')
-        this.img.width = width
-        this.img.height = height
-        this.img.src = MCKAYLA_IMG_URL
-        this.img.style.position = 'absolute'
-        this.img.style.left = src_img.right - width + "px"
-        this.img.style.top = src_img.bottom - height + "px"
-        this.img.style['z-index'] = 1 + (src_img.zIndex !== 'auto' ? src_img.zIndex : 0)
+        var img = document.createElement('img')
+        img.width = width
+        img.height = height
+        img.src = MCKAYLA_IMG_URL
+        img.style.position = 'absolute'
+        img.style.left = (src_img.right - width) + 'px'
+        img.style.top = (src_img.bottom - height) + 'px'
+        img.style['z-index'] = 1 + (src_img.zIndex !== 'auto' ? src_img.zIndex : 0)
+        return img;
     }
-    ,add: function(parent) {
-        // Call generate() if this.img is null
-        this.img || this.generate()
-
-        $(this.img).click(function(e) {
+    ,add: function(src_img, parent) {
+        var img = this.generate(src_img)
+        $(img).click(function(e) {
             e.preventDefault()
             $(this).hide(250)
         })
 
         parent = parent || document.body
-        parent.appendChild(this.img)
+        parent.appendChild(img)
     }
 }
 
 jQuery(document).ready(function($) {
+    console.log('Overlaying McKayla...:')
+
     $('img:visible').each(function() {
         if (Math.random() <= THRESHOLD
                 && $(this) != undefined
@@ -60,11 +67,10 @@ jQuery(document).ready(function($) {
                 && $(this).attr('src') != MCKAYLA_IMG_URL
                 && $(this).height() >= 50) {
 
-            console.log("Overlaying McKayla on: " + $(this).attr('src'))
+            console.log($(this).attr('src'))
 
             // Create instance of McKayla object and add to document body
-            var mckayla = new McKayla(this)
-            mckayla.add()
+            McKayla.add(this)
         }
     })
 })
